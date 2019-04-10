@@ -1,0 +1,109 @@
+---
+title: "The trendiest baby names in Poland"
+author: "Olga Mierzwa-Sulima"
+date: 2019-04-10
+categories: ["R"]
+tags: ["R", "baby-names"]
+---
+
+It is a challenge to choose a name for your baby. At least it has been for me. To make this decision easier I wanted to look into current trends, as neither my husband nor I wanted a baby to have a super popular name. If you want to know what names are currently trending in Poland this post is for you.
+
+Polish Ministry of Digitalization publishes the baby names statistics. [Data](https://dane.gov.pl/dataset/219) is available from 2000 to 2018. In this blog post I analyze the trends from the last 19 years and try to predict the situation in 2019.
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, titdy = TRUE,
+                      tidy.opts = list(comment = FALSE))
+```
+
+```{r}
+knitr::read_chunk("babynames/babynames.R")
+```
+
+```{r constants}
+```
+
+```{r read_libraries_data}
+```
+
+```{r helper_functions}
+```
+
+```{r filter_data}
+```
+
+## Hottest names in 2018
+
+Let's first explore the numbers from 2018 and see how the trends have developed. 
+
+### Trends in baby girl names
+
+`r round(sum(girls_2018_top10$ratio), 2) * 100`% of all the baby girls born in 2018 hold one the 10 most popular names, which were `r girls_2018_top10$Name`.
+
+We can see how these names were trending over the last 19 years.
+
+```{r animate_girls}
+```
+
+### Trends in baby boy names
+
+Now let's do the same and look into boy names.
+
+`r round(sum(boys_2018_top10$ratio), 2) * 100`% of all the baby boys born in 2018 hold one the 10 most popular names, which were `r boys_2018_top10$Name`.
+
+We can see how these names were trending over the last 19 years.
+
+```{r animate_boys}
+```
+
+Both in girl and boy names trends we can observe similarities. There are certain names like Julia or Jakub that have been constantly fashionable. Others (e.g. Lena, Franciszek, Antoni) popularity is more seasonal and changed in the recent years.
+
+## Most trendy names in the last 19 years
+
+Before we move to explore the future I let you check the stats year by year from 2000 to 2018.
+
+### Baby girl names
+
+```{r dt_girls}
+```
+
+
+### Baby boy names
+
+```{r dt_boys}
+```
+
+
+## Sneak peek into 2019
+
+```{r forecasting}
+```
+
+
+```{r forecast_girls}
+```
+
+
+```{r forecast_boys}
+```
+
+As my baby is due in 2019 I wanted to know what a future might look like. So I made a simple prediction using historical data to check that. 
+Findings?
+
+```{r plot_forecast_girls}
+```
+
+It seems that in 2019 the top 10 girl names will be the same as in 2018, with only minor changes. Julia is expected to make a come back to the top of the list. 
+Fewer babies will be named: Zuzanna, Maja, Lena and Amelia in 2019 comparing to 2018. With Amelia decreasing the most (-761), despite only dropping by one position in the ranking (9th in 2018, 10th in 2019). 
+The rest of the names are expected to gain in popularity in 2019. Hanna is expected to raise the most (406).
+
+```{r plot_forecast_boys}
+```
+
+The situation with boy names looks even more stable than with girl names. There should be no changes in ranking positions for the first 6 most popular names. 
+2018 was the last year when Kacper was in the top 10. In 2019 Adam will appear on the list instead, despite not gaining in popularity. 
+Filip is the only boy name that will lose in popularity (-516). Antoni, Jan, Aleksander, Franciszek, Mikołaj on the other hand will become even more popular, with Antoni gaining the most (+500).
+
+If we compare the two charts with each other we can see that girl names are clustered in the 2 groups (first: top 1-6 and second: top 7-10), while boy names are more evenly distributed.
+
+Hope you enjoy the post. If you are interested in seeing the R code please checkout GitHub.
