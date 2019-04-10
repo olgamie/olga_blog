@@ -8,7 +8,7 @@ tags: ["R", "baby-names"]
 
 It is a challenge to choose a name for your baby. At least it has been for me. To make this decision easier I wanted to look into current trends, as neither my husband nor I wanted a baby to have a super popular name. If you want to know what names are currently trending in Poland this post is for you.
 
-Polish Ministry of Digitalization publishes the baby names statistics. [Data](https://dane.gov.pl/dataset/219) is available from 2000 to 2018. In this blog post I analyze the trends from the last 19 years and try to predict the situation in 2019.
+Polish Ministry of Digitalization publishes the baby names statistics. [Data](https://dane.gov.pl/dataset/219){target="_blank"} is available from 2000 to 2018. In this blog post I analyze the trends from the last 19 years and try to predict the situation in 2019.
 
 
 ```{r, include = FALSE}
@@ -106,4 +106,4 @@ Filip is the only boy name that will lose in popularity (-516). Antoni, Jan, Ale
 
 If we compare the two charts with each other we can see that girl names are clustered in the 2 groups (first: top 1-6 and second: top 7-10), while boy names are more evenly distributed.
 
-Hope you enjoy the post. If you are interested in seeing the R code please checkout GitHub.
+Hope you enjoy the post. If you are interested in seeing the R code please checkout [GitHub](https://github.com/olgamie/olga_blog/blob/master/content/post/babynames/babynames.R){target="_blank"}.
