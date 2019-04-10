@@ -1,0 +1,69 @@
+baseurl = "https://olgamierzwa.com/"
+languageCode = "en-us"
+title = "Hello!"
+theme = "minimal"
+builddrafts = true
+canonifyurls = true
+enableEmoji = true
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "olgamie.github.io"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[params]
+    author = "Olga Mierzwa-Sulima"
+    description = "Personal blog by Olga Mierzwa-Sulima"
+    githubUsername = "#"
+    accent = "#28d102"
+    showBorder = true
+    backgroundColor = "white"
+    font = "Roboto" # should match the name on Google Fonts!
+    highlight = true
+    highlightStyle = "solarized-dark"
+    highlightLanguages = ["r"]
+    progressively = true
+    latestpostcount = 5
+    copyright = "Copyright © 2019 Olga Mierzwa-Sulima"
+    posts_navigation = true
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+    
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+[[menu.main]]
+    name = "Blog"
+    url = "/post"
+    weight = 2
+[[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 3
+
+# Social icons to be shown on the right-hand side of the navigation bar
+# The "name" field should match the name of the icon to be used
+# The list of available icons can be found at http://fontawesome.io/icons/
+
+[[menu.icon]]
+    url = "mailto:olga.mierzwa@gmail.com"
+    name = "envelope-o"
+    weight = 1
+
+[[menu.icon]]
+    url = "https://github.com/olgamie"
+    name = "github"
+    weight = 2
+
+[[menu.icon]]
+    url = "https://twitter.com/olga_mie/"
+    name = "twitter"
+    weight = 3
+
+[[menu.icon]]
+    url = "https://www.linkedin.com/in/olga-mierzwa-sulima-84843539/"
+    name = "linkedin"
+    weight = 4

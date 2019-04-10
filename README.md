@@ -1,2 +1,1 @@
-# olga_blog
-Personal blog in R blogdown
+# Personal blog from Olga Mierzwa-Sulima
