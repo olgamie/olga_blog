@@ -1,0 +1,63 @@
+---
+title: "The trendiest baby names in Poland"
+author: "Olga Mierzwa-Sulima"
+date: 2019-04-10
+categories: ["R"]
+tags: ["R", "baby-names"]
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+
+
+<p>It is a challenge to choose a name for your baby. At least it has been for me. To make this decision easier I wanted to look into current trends, as neither my husband nor I wanted a baby to have a super popular name. If you want to know what names are currently trending in Poland this post is for you.</p>
+<p>Polish Ministry of Digitalization publishes the baby names statistics. <a href="https://dane.gov.pl/dataset/219">Data</a> is available from 2000 to 2018. In this blog post I analyze the trends from the last 19 years and try to predict the situation in 2019.</p>
+<div id="hottest-names-in-2018" class="section level2">
+<h2>Hottest names in 2018</h2>
+<p>Let’s first explore the numbers from 2018 and see how the trends have developed.</p>
+<div id="trends-in-baby-girl-names" class="section level3">
+<h3>Trends in baby girl names</h3>
+<p>36% of all the baby girls born in 2018 hold one the 10 most popular names, which were Zuzanna, Julia, Maja, Zofia, Hanna, Lena, Alicja, Maria, Amelia, Oliwia.</p>
+<p>We can see how these names were trending over the last 19 years.</p>
+<p><img src="/post/2019-04-01-r-rmarkdown_files/figure-html/animate_girls-1.gif" /><!-- --></p>
+</div>
+<div id="trends-in-baby-boy-names" class="section level3">
+<h3>Trends in baby boy names</h3>
+<p>Now let’s do the same and look into boy names.</p>
+<p>35% of all the baby boys born in 2018 hold one the 10 most popular names, which were Antoni, Jakub, Jan, Szymon, Aleksander, Franciszek, Filip, Mikołaj, Wojciech, Kacper.</p>
+<p>We can see how these names were trending over the last 19 years.</p>
+<p><img src="/post/2019-04-01-r-rmarkdown_files/figure-html/animate_boys-1.gif" /><!-- --></p>
+<p>Both in girl and boy names trends we can observe similarities. There are certain names like Julia or Jakub that have been constantly fashionable. Others (e.g. Lena, Franciszek, Antoni) popularity is more seasonal and changed in the recent years.</p>
+</div>
+</div>
+<div id="most-trendy-names-in-the-last-19-years" class="section level2">
+<h2>Most trendy names in the last 19 years</h2>
+<p>Before we move to explore the future I let you check the stats year by year from 2000 to 2018.</p>
+<div id="baby-girl-names" class="section level3">
+<h3>Baby girl names</h3>
+<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10],[2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2001,2001,2001,2001,2001,2001,2001,2001,2001,2001,2002,2002,2002,2002,2002,2002,2002,2002,2002,2002,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2004,2004,2004,2004,2004,2004,2004,2004,2004,2004,2005,2005,2005,2005,2005,2005,2005,2005,2005,2005,2006,2006,2006,2006,2006,2006,2006,2006,2006,2006,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2010,2010,2010,2010,2010,2010,2010,2010,2010,2010,2011,2011,2011,2011,2011,2011,2011,2011,2011,2011,2012,2012,2012,2012,2012,2012,2012,2012,2012,2012,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2014,2014,2014,2014,2014,2014,2014,2014,2014,2014,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],["Natalia","Aleksandra","Wiktoria","Julia","Weronika","Karolina","Klaudia","Paulina","Patrycja","Katarzyna","Julia","Natalia","Wiktoria","Aleksandra","Weronika","Karolina","Klaudia","Patrycja","Zuzanna","Paulina","Julia","Wiktoria","Natalia","Aleksandra","Weronika","Zuzanna","Martyna","Karolina","Klaudia","Patrycja","Julia","Wiktoria","Natalia","Aleksandra","Oliwia","Weronika","Zuzanna","Martyna","Karolina","Patrycja","Julia","Wiktoria","Natalia","Aleksandra","Oliwia","Zuzanna","Weronika","Martyna","Karolina","Patrycja","Julia","Wiktoria","Natalia","Aleksandra","Oliwia","Zuzanna","Martyna","Weronika","Karolina","Amelia","Julia","Wiktoria","Oliwia","Natalia","Aleksandra","Zuzanna","Martyna","Maja","Amelia","Weronika","Julia","Wiktoria","Oliwia","Zuzanna","Natalia","Aleksandra","Amelia","Maja","Martyna","Weronika","Julia","Wiktoria","Zuzanna","Maja","Oliwia","Natalia","Amelia","Aleksandra","Nikola","Martyna","Julia","Maja","Zuzanna","Wiktoria","Oliwia","Amelia","Natalia","Aleksandra","Lena","Nikola","Julia","Maja","Zuzanna","Lena","Wiktoria","Amelia","Oliwia","Aleksandra","Natalia","Zofia","Julia","Maja","Lena","Zuzanna","Wiktoria","Amelia","Aleksandra","Oliwia","Natalia","Zofia","Julia","Lena","Maja","Zuzanna","Wiktoria","Amelia","Oliwia","Aleksandra","Natalia","Zofia","Lena","Julia","Zuzanna","Maja","Zofia","Amelia","Hanna","Aleksandra","Wiktoria","Natalia","Lena","Julia","Zuzanna","Maja","Zofia","Hanna","Amelia","Aleksandra","Natalia","Wiktoria","Zuzanna","Lena","Julia","Maja","Zofia","Hanna","Amelia","Aleksandra","Alicja","Natalia","Zuzanna","Julia","Lena","Maja","Hanna","Zofia","Amelia","Alicja","Aleksandra","Natalia","Julia","Zuzanna","Zofia","Lena","Maja","Hanna","Amelia","Alicja","Maria","Aleksandra","Zuzanna","Julia","Maja","Zofia","Hanna","Lena","Alicja","Maria","Amelia","Oliwia"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Rank<\/th>\n      <th>Year<\/th>\n      <th>Name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-left","targets":"_all"}],"initComplete":"function(settings, json) {\n$('body').css({'font-family': 'Roboto Condensed'});\n}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+<div id="baby-boy-names" class="section level3">
+<h3>Baby boy names</h3>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"none","data":[[1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10,1,2,3,4,5,6,7,8,9,10],[2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2001,2001,2001,2001,2001,2001,2001,2001,2001,2001,2002,2002,2002,2002,2002,2002,2002,2002,2002,2002,2003,2003,2003,2003,2003,2003,2003,2003,2003,2003,2004,2004,2004,2004,2004,2004,2004,2004,2004,2004,2005,2005,2005,2005,2005,2005,2005,2005,2005,2005,2006,2006,2006,2006,2006,2006,2006,2006,2006,2006,2007,2007,2007,2007,2007,2007,2007,2007,2007,2007,2008,2008,2008,2008,2008,2008,2008,2008,2008,2008,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009,2010,2010,2010,2010,2010,2010,2010,2010,2010,2010,2011,2011,2011,2011,2011,2011,2011,2011,2011,2011,2012,2012,2012,2012,2012,2012,2012,2012,2012,2012,2013,2013,2013,2013,2013,2013,2013,2013,2013,2013,2014,2014,2014,2014,2014,2014,2014,2014,2014,2014,2015,2015,2015,2015,2015,2015,2015,2015,2015,2015,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],["Jakub","Mateusz","Kacper","Michał","Patryk","Dawid","Kamil","Piotr","Szymon","Paweł","Jakub","Mateusz","Kacper","Michał","Dawid","Patryk","Kamil","Piotr","Szymon","Bartosz","Jakub","Mateusz","Kacper","Michał","Dawid","Patryk","Szymon","Kamil","Piotr","Bartosz","Jakub","Kacper","Mateusz","Michał","Dawid","Szymon","Patryk","Kamil","Bartosz","Piotr","Jakub","Kacper","Mateusz","Michał","Dawid","Szymon","Kamil","Bartosz","Patryk","Maciej","Jakub","Kacper","Mateusz","Michał","Szymon","Bartosz","Dawid","Kamil","Maciej","Piotr","Jakub","Kacper","Mateusz","Szymon","Bartosz","Michał","Dawid","Piotr","Filip","Maciej","Jakub","Kacper","Mateusz","Szymon","Bartosz","Michał","Dawid","Filip","Piotr","Wiktor","Jakub","Kacper","Mateusz","Szymon","Bartosz","Filip","Michał","Dawid","Wiktor","Piotr","Jakub","Kacper","Szymon","Filip","Mateusz","Michał","Bartosz","Wiktor","Piotr","Dawid","Jakub","Szymon","Kacper","Filip","Michał","Mateusz","Bartosz","Adam","Wojciech","Wiktor","Jakub","Szymon","Filip","Kacper","Michał","Mateusz","Bartosz","Adam","Jan","Wojciech","Jakub","Kacper","Filip","Szymon","Jan","Michał","Antoni","Mateusz","Bartosz","Adam","Jakub","Kacper","Filip","Szymon","Jan","Antoni","Michał","Wojciech","Adam","Mateusz","Jakub","Kacper","Antoni","Filip","Jan","Szymon","Franciszek","Aleksander","Michał","Wojciech","Jakub","Antoni","Szymon","Jan","Filip","Kacper","Aleksander","Franciszek","Mikołaj","Wojciech","Antoni","Jakub","Szymon","Jan","Filip","Franciszek","Mikołaj","Aleksander","Kacper","Wojciech","Antoni","Jakub","Jan","Szymon","Franciszek","Filip","Aleksander","Mikołaj","Wojciech","Kacper","Antoni","Jakub","Jan","Szymon","Aleksander","Franciszek","Filip","Mikołaj","Wojciech","Kacper"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Rank<\/th>\n      <th>Year<\/th>\n      <th>Name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-left","targets":"_all"}],"initComplete":"function(settings, json) {\n$('body').css({'font-family': 'Roboto Condensed'});\n}","order":[],"autoWidth":false,"orderClasses":false}},"evals":["options.initComplete"],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="sneak-peek-into-2019" class="section level2">
+<h2>Sneak peek into 2019</h2>
+<p>As my baby is due in 2019 I wanted to know what a future might look like. So I made a simple prediction using historical data to check that. Findings?</p>
+<p><img src="/post/2019-04-01-r-rmarkdown_files/figure-html/plot_forecast_girls-1.png" width="672" /></p>
+<p>It seems that in 2019 the top 10 girl names will be the same as in 2018, with only minor changes. Julia is expected to make a come back to the top of the list. Fewer babies will be named: Zuzanna, Maja, Lena and Amelia in 2019 comparing to 2018. With Amelia decreasing the most (-761), despite only dropping by one position in the ranking (9th in 2018, 10th in 2019). The rest of the names are expected to gain in popularity in 2019. Hanna is expected to raise the most (406).</p>
+<p><img src="/post/2019-04-01-r-rmarkdown_files/figure-html/plot_forecast_boys-1.png" width="672" /></p>
+<p>The situation with boy names looks even more stable than with girl names. There should be no changes in ranking positions for the first 6 most popular names. 2018 was the last year when Kacper was in the top 10. In 2019 Adam will appear on the list instead, despite not gaining in popularity. Filip is the only boy name that will lose in popularity (-516). Antoni, Jan, Aleksander, Franciszek, Mikołaj on the other hand will become even more popular, with Antoni gaining the most (+500).</p>
+<p>If we compare the two charts with each other we can see that girl names are clustered in the 2 groups (first: top 1-6 and second: top 7-10), while boy names are more evenly distributed.</p>
+<p>Hope you enjoy the post. If you are interested in seeing the R code please checkout GitHub.</p>
+</div>
