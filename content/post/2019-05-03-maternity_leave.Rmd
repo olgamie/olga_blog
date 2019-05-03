@@ -1,0 +1,55 @@
+---
+title: "Parental leave across OECD countries"
+author: "Olga Mierzwa-Sulima"
+date: 2019-05-03
+categories: ["R"]
+tags: ["R", "plotly", "parental-leave"]
+---
+
+## A quick look into paid leave available to moms
+
+I was recently researching maternity leave options in Poland. In simplification as a mother in Poland you can get:
+
+* a year of a paid leave at a rate 80% (20 weeks of maternity leave and 32 of parental leave)
+* half a year (20 weeks maternity leave + 6 weeks parental leave) paid 100% and another half 60% (26 weeks of parental leave). 
+
+You can use your parental leave straight after maternity leave or in chunks, split with the baby father or combine it with work. I won't go into too many details of the Polish social security system.
+I was curious about how this compares to what other countries have to offer. I found out that the situation of Polish mothers looks pretty good, judging based on the <a href="https://www.oecd.org/els/soc/PF2_1_Parental_leave_systems.pdf" target="_blank">data</a> from 2016.
+
+## Battle Royale: Time vs. Money
+
+Just like with any other area of life, it's also about the trade-off between money and time. The longer you stay with your kid the less money you get. So what would you prefer?
+
+Inspired by the <a href="https://blog.datawrapper.de/weekly37/" target="_blank">visualization</a> from Datawrapper's Lisa Rost, I analyzed the 2016 OECD data on the maternity and parental leave available to mothers.
+
+### Key takeaways
+
+* OECD 2016 **total paid leave average is 1 year 2 weeks** and **payment rate 61%** of the salary mother's salary
+* countries of the former Eastern block offer the longest leave
+* 3 countries with **the longest leave** are: **Estonia** 166 weeks paid 51%, equivalent to 85 weeks paid 100%, **Slovakia** 164 weeks paid 33% (54 weeks 100%), **Hungary** 160 weeks paid 45% (72 weeks 100%)
+* **United States** are the only OECD country that doesn't offer any sort of leave
+* **Poland** offers pretty good benefits, reaching almost OECD average (2 weeks less) when it comes to a leave duration and offering 20% more money than OECD average.
+
+Find out more about the different countries benefits by hovering on the data points in the plot. Labels for some countries are hidden to improve readability.
+
+<br>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, titdy = TRUE,
+                      tidy.opts = list(comment = FALSE))
+```
+
+```{r}
+knitr::read_chunk("parental-leave/parental-leave-oecd.R")
+```
+```{r plot_leave_vs_paid_rate}
+
+```
+
+<br>
+
+### Note
+
+State and local government can provide additional entitlements which are not included in the analyzed data. Provided data also doesn't account for top-up payments made by employers. Different countries have different taxation rules and social security contributions, which are not reflected in the dataset.
+
+Plotly chart code is available on <a href="https://github.com/olgamie/olga_blog/blob/master/content/post/parental-leave/parental-leave-oecd.R" target="_blank">GitHub</a>.
