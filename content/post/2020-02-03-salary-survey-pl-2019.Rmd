@@ -1,0 +1,62 @@
+---
+title: "Data Science Salary Survey in Poland 2019"
+author: "Olga Mierzwa-Sulima"
+date: '2020-02-03'
+tags:
+- data-science
+- salary
+- R
+- python
+categories: data-science
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is a Data Science Salary Survey?
+
+At the end of 2019 as one of the [Warsaw R Enthusiasts Meetup](https://www.meetup.com/pl-PL/Spotkania-Entuzjastow-R-Warsaw-R-Users-Group-Meetup/) initiatives I designed a [salary survey](https://docs.google.com/forms/d/1a4GFhDBK79WDm0l3i4tfyv4q-d1fq8BODszUdyRR4L4/edit) for broadly understood data science/data analysis/machine learning job market in Poland. This exercise was inspired by the [similar survey from Germany](https://nitoloz.github.io/salary-report/).
+A survey was advertised using social media among the R/data science/machine learning community. Despite Meetup organizers' attempts to reach as many people in the community as possible, I acknowledge that these results don't represent everyone on the Polish data science scene. However, I hope they provide useful information about the Polish data science labor market for both employees and employers.
+
+## Respondents profile
+
+<iframe title="Respondents Age" aria-label="Bar Chart" src="https://datawrapper.dwcdn.net/ks4iR/3/" scrolling="no" frameborder="0" style="border: none;" width="600" height="295"></iframe>
+
+Almost 60% of the respondents are below 30 years old.
+
+<iframe title="Respondents gender" aria-label="Bar Chart" src="https://datawrapper.dwcdn.net/aplOh/2/" scrolling="no" frameborder="0" style="border: none;" width="600" height="171"></iframe>
+
+Almost 76% of the people identified themselves as men, 24% as women and 1 person didn't want to share the details about gender. The survey allowed to select "Male", "Female" or a text field "Other", where respondents could provide their answers.
+
+<iframe title="Respondents profile" aria-label="Bar Chart" src="https://datawrapper.dwcdn.net/n7fBW/5/" scrolling="no" frameborder="0" style="border: none;" width="600" height="1128"></iframe>
+
+A vast majority of the respondents are data scientists, analysts or machine learning engineers. This is not surprising taking into account that this was a survey target group.
+
+<iframe title="Most used technology" aria-label="Bar Chart" src="https://datawrapper.dwcdn.net/2ZDQK/7/" scrolling="no" frameborder="0" style="border: none;" width="600" height="798"></iframe>
+
+Python and R are the most used technologies among the respondents.
+
+
+## Employment and salaries
+
+The goal of the survey was to obtain respondents' net income to be able to compare salaries between people having employment contracts and contractors. These two forms of employment differ in the amount of social contributions and tax. People working on employment contracts pay much higher social premiums.
+
+<iframe title="Respondents employment type" aria-label="Bar Chart" src="https://datawrapper.dwcdn.net/idAAj/3/" scrolling="no" frameborder="0" style="border: none;" width="600" height="206"></iframe>
+
+I suspect that the question about the employment type was not formulated properly. It doesn't capture the distinction between these 2 forms of employment. Being a contractor is a very popular form of cooperation between an employer and employee in the Polish IT job market. Some companies offer solely the B2B form. Knowing that I would expect "Independent contractor; freelancer; or self-employed" as the most popular answer for an employment type. Most likely "Employed full-time" was picked both by people having an employment contract and contractors working for a single employer. Being able to capture this difference would be very interesting. That's something to fix in the next year's survey.
+
+<iframe title="Average Net Monthly Income vs. Years of Relevant Experience" aria-label="Scatter Plot" src="https://datawrapper.dwcdn.net/KfTr3/4/" scrolling="no" frameborder="0" style="border: none;" width="600" height="500"></iframe>
+
+Yearly stocks are excluded from the chart as this form of employees' compensation is almost non-existing in Poland. Less than 3% of respondents reported such benefits.
+
+Income increases with additional years of experience which is not surprising. There is a lot of spread in wages for a given experience value. 
+
+An average male has 3.9 years of experience and receives 8889 PLN monthly and female 4.2 years and gets 7693 PLN monthly.
+
+## Analysis
+Raw survey data was cleaned and analyzed in R. I hope to publish soon a separate blogpost together with an R code.
+
+Want to dive into the results yourself? Data is available on the [Google Drive](https://docs.google.com/spreadsheets/d/1po8Q24WUpttf3vCC80Ldyuf-o-UkuCSap4ABGZzzXeY/edit#gid=418918147).
+
+Thanks for reading!
