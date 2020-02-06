@@ -50,7 +50,7 @@ I care deeply about the environment.
 
 ## Workshops
 
-**october 2017 R-Ladies Workshop + Code Carrots Warsaw Poland**
+**October 2017 R-Ladies Workshop + Code Carrots Warsaw Poland**
 
 * Data Visualizations in R (semi advanced group) whole day event
 
