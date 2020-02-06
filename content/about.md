@@ -1,6 +1,6 @@
 ---
 title: "About me"
-date: 2019-04-01
+date: 2020-02-06
 ---
 
 My name is Olga Mierzwa-Sulima and I am a Senior Data Scientist at <a href="https://appsilon.com" target="_blank">Appsilon</a>. I love solving problems using data, beautiful visualizations, dogs and back-country skiing.
