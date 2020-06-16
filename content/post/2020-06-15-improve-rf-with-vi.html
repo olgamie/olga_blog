@@ -39,32 +39,12 @@ After I have the model I plug it into <code>DALEX</code> explainer, perform vari
 <div id="solution-in-r" class="section level2">
 <h2>Solution in R</h2>
 <p>Read in R packages.</p>
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;readr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;forcats&#39; was built under R version 3.6.2</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## Warning: package &#39;lubridate&#39; was built under R version 3.6.2</code></pre>
-<pre class="r"><code>library(ranger)</code></pre>
-<pre><code>## Warning: package &#39;ranger&#39; was built under R version 3.6.3</code></pre>
-<pre class="r"><code>library(DALEX)</code></pre>
-<pre><code>## Warning: package &#39;DALEX&#39; was built under R version 3.6.3</code></pre>
-<pre class="r"><code>library(tidymodels)</code></pre>
-<pre><code>## Warning: package &#39;tidymodels&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;broom&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## Warning: package &#39;dials&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;infer&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;parsnip&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;recipes&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;rsample&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;tune&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;workflows&#39; was built under R version 3.6.3</code></pre>
-<pre><code>## Warning: package &#39;yardstick&#39; was built under R version 3.6.3</code></pre>
-<pre class="r"><code>library(rlang)</code></pre>
-<pre><code>## Warning: package &#39;rlang&#39; was built under R version 3.6.3</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+library(ranger)
+library(DALEX)
+library(tidymodels)
+library(rlang)</code></pre>
 <p>Read in data.</p>
 <pre class="r"><code>data_raw &lt;- read_csv(file = &quot;Train.csv&quot;)</code></pre>
 <div id="data-pre-processing" class="section level3">
@@ -170,11 +150,10 @@ I limit the number of trees to speed the training process to 40.</p>
                        seed = 1,
                        min.node.size = 3,
                        sample.fraction = 0.4))</code></pre>
-<pre><code>## Growing trees.. Progress: 23%. Estimated remaining time: 2 minutes, 21 seconds.
-## Growing trees.. Progress: 53%. Estimated remaining time: 1 minute, 10 seconds.
-## Growing trees.. Progress: 93%. Estimated remaining time: 9 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 23%. Estimated remaining time: 2 minutes, 10 seconds.
+## Growing trees.. Progress: 63%. Estimated remaining time: 46 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-##  767.76    3.55  124.01</code></pre>
+##  765.25    2.10  106.45</code></pre>
 <pre class="r"><code>ranger_predictions &lt;- predict(ranger_model_with_sampling, x_valid)
 
 rmse &lt;- function(preds, y){
@@ -242,13 +221,13 @@ x_after_var_importance &lt;- x_train %&gt;% select(var_to_keep$variable)</code><
                        min.node.size = 3,
                        sample.fraction = 0.4))</code></pre>
 <pre><code>##    user  system elapsed 
-##  105.90    0.86   14.71</code></pre>
+##  166.75    1.13   24.61</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi &lt;- predict(ranger_model_after_vi,
                                        x_valid %&gt;% select(var_to_keep$variable))
 
 eval_model(
   ranger_model_after_vi, y_train, y_valid, ranger_predictions_after_vi$predictions)</code></pre>
-<pre><code>## [1] 0.9059101 0.2124447 0.2883198</code></pre>
+<pre><code>## [1] 0.9072735 0.2108998 0.2880594</code></pre>
 <p>I end up with a simpler model with almost the same quality, differences in R^2 and RMSE are neglectable. I prefer to continue with model with less features which runs faster.</p>
 <p>Let’s again look at variable importance plot and do more digging.</p>
 <pre class="r"><code>explainer_ranger_after_vi  &lt;- explain(ranger_model_after_vi,
@@ -256,14 +235,14 @@ eval_model(
                                       y = y_train)</code></pre>
 <pre><code>## Preparation of a new explainer is initiated
 ##   -&gt; model label       :  ranger  ( [33m default [39m )
-##   -&gt; data              :  320900  rows  19  cols 
+##   -&gt; data              :  320900  rows  28  cols 
 ##   -&gt; data              :  tibbble converted into a data.frame 
 ##   -&gt; target variable   :  320900  values 
 ##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task regression ( [33m default [39m ) 
 ##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
-##   -&gt; predicted values  :  numerical, min =  8.522021 , mean =  10.10266 , max =  11.83046  
+##   -&gt; predicted values  :  numerical, min =  8.526311 , mean =  10.10291 , max =  11.83702  
 ##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
-##   -&gt; residuals         :  numerical, min =  -1.788188 , mean =  -0.0001545799 , max =  1.473976  
+##   -&gt; residuals         :  numerical, min =  -1.737928 , mean =  -0.0004099411 , max =  1.387644  
 ##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>var_importance_ranger_after_vi &lt;- variable_importance(
   explainer_ranger_after_vi,
@@ -350,14 +329,15 @@ x_valid &lt;- x_valid %&gt;%
                        seed = 1,
                        min.node.size = 3,
                        sample.fraction = 0.4))</code></pre>
+<pre><code>## Growing trees.. Progress: 83%. Estimated remaining time: 6 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-##   70.71    0.45   10.08</code></pre>
+##  221.10    3.27   37.80</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi_clean &lt;- predict(ranger_model_after_vi_data_clean,
                                        x_valid)
 
 eval_model(
   ranger_model_after_vi_data_clean, y_train, y_valid, ranger_predictions_after_vi_clean$predictions)</code></pre>
-<pre><code>## [1] 0.9070474 0.2111568 0.2528856</code></pre>
+<pre><code>## [1] 0.9088085 0.2091469 0.2546982</code></pre>
 <p>It seems cleaning YearMade and dropping IDs improved the model.</p>
 </div>
 </div>
