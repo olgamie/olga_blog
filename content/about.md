@@ -16,6 +16,10 @@ I care deeply about the environment.
 
 ## Talks
 
+**July 2020 <a href="https://user2020.r-project.org/" target="_blank">useR! 2020</a>**
+
+* <a href="https://www.youtube.com/watch?v=Wzmj0cFLfic&feature=emb_logo" target="_blank">Tackling Climate Change breakout session</a>
+
 **September 2019 <a href="http://whyr.pl/2019/" target="_blank">Why R? Warsaw Poland</a> (Invited speaker)**
 
 * <a href="https://github.com/WhyR2019/presentations/blob/master/Philosophy/Traits%20of%20a%20world%20class%20data%20scientist%20WhyR%202019.pdf" target="_blank">Traits of a world class data scientist</a>
