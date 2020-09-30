@@ -1,4 +1,5 @@
 ---
+title: "Building first baseline with random forest using ranger and DALEX"
 author: "Olga Mierzwa-Sulima"
 date: '2020-09-30'
 tags:
@@ -152,12 +153,13 @@ I limit the number of trees to speed the training process to 40.</p>
                        sample.fraction = 1,
                        respect.unordered.factors = &quot;ignore&quot;
                        ))</code></pre>
-<pre><code>## Growing trees.. Progress: 15%. Estimated remaining time: 2 minutes, 55 seconds.
-## Growing trees.. Progress: 33%. Estimated remaining time: 2 minutes, 10 seconds.
-## Growing trees.. Progress: 57%. Estimated remaining time: 1 minute, 10 seconds.
-## Growing trees.. Progress: 83%. Estimated remaining time: 28 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 13%. Estimated remaining time: 4 minutes, 12 seconds.
+## Growing trees.. Progress: 33%. Estimated remaining time: 2 minutes, 31 seconds.
+## Growing trees.. Progress: 53%. Estimated remaining time: 1 minute, 36 seconds.
+## Growing trees.. Progress: 73%. Estimated remaining time: 54 seconds.
+## Growing trees.. Progress: 93%. Estimated remaining time: 14 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 568.808   1.669 158.982</code></pre>
+## 603.448   2.242 186.687</code></pre>
 <pre class="r"><code>ranger_predictions &lt;- predict(ranger_model_with_sampling, x_valid)
 
 rmse &lt;- function(preds, y){
@@ -224,15 +226,15 @@ x_after_var_importance &lt;- x_train %&gt;% select(var_to_keep$variable)</code><
                        respect.unordered.factors = F,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 60%. Estimated remaining time: 20 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 53%. Estimated remaining time: 28 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 202.407   0.673  53.474</code></pre>
+## 211.841   0.877  62.166</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi &lt;- predict(ranger_model_after_vi,
                                        x_valid %&gt;% select(var_to_keep$variable))
 
 eval_model(
   ranger_model_after_vi, y_train, y_valid, ranger_predictions_after_vi$predictions)</code></pre>
-<pre><code>## [1] 0.9089414 0.2082239 0.2713373</code></pre>
+<pre><code>## [1] 0.9089519 0.2082119 0.2692650</code></pre>
 <p>I end up with a simpler model with almost the same quality, differences in R^2 and RMSE are neglectable. I prefer to continue with model with less features which runs faster.</p>
 <p>Let’s again look at variable importance plot and do more digging.</p>
 <pre class="r"><code>explainer_ranger_after_vi  &lt;- explain(ranger_model_after_vi,
@@ -244,10 +246,10 @@ eval_model(
 ##   -&gt; data              :  tibble converted into a data.frame 
 ##   -&gt; target variable   :  320900  values 
 ##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
-##   -&gt; predicted values  :  numerical, min =  8.490319 , mean =  10.09761 , max =  11.84655  
+##   -&gt; predicted values  :  numerical, min =  8.482757 , mean =  10.09765 , max =  11.84426  
 ##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task regression ( [33m default [39m ) 
 ##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
-##   -&gt; residuals         :  numerical, min =  -1.232571 , mean =  -6.792331e-05 , max =  0.9657746  
+##   -&gt; residuals         :  numerical, min =  -1.201127 , mean =  -0.0001043412 , max =  0.9551131  
 ##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>var_importance_ranger_after_vi &lt;- variable_importance(
   explainer_ranger_after_vi,
@@ -335,15 +337,15 @@ x_valid &lt;- x_valid %&gt;%
                        seed = 1,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 75%. Estimated remaining time: 10 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 60%. Estimated remaining time: 20 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 151.394   0.699  41.831</code></pre>
+## 159.987   0.800  52.192</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi_clean &lt;- predict(ranger_model_after_vi_data_clean,
                                        x_valid)
 
 eval_model(
   ranger_model_after_vi_data_clean, y_train, y_valid, ranger_predictions_after_vi_clean$predictions)</code></pre>
-<pre><code>## [1] 0.9107927 0.2060964 0.2653428</code></pre>
+<pre><code>## [1] 0.9104619 0.2064781 0.2667099</code></pre>
 <p>It seems cleaning YearMade and dropping IDs improved the model just a bit.</p>
 </div>
 </div>
