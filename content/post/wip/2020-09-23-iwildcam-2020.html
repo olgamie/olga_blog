@@ -1,0 +1,42 @@
+---
+title: "Learning Deep Learning Vision - Top 10% in Kaggle iWildCam 2020 solution"
+author: "Olga Mierzwa-Sulima"
+date: '2020-09-23'
+tags:
+- deep learning
+- vision
+- fastai
+- python
+categories: data-science
+---
+
+
+
+<p>I used data from <a href="https://www.kaggle.com/c/iwildcam-2020-fgvc7/overview">iWildCam 2020</a> Kaggle competition to practice machine learning vision after completing fast.ai deep learning course.
+I manage to build a solution that achived 77% accuracy on the test set in classifying animals on the camera trap photo, which places the solution in the top 10% of this competition (11/121).
+I build two models: the first model was a ResNet50 on the original images just resized, with data augmentation, mixup and TTA, the second model was also ResNet50 build on the cropped images to bboxes detecting the animals. Predictions were aggregated with probabilities from original images model weighted with 0.3 and 0.7 for a cropped model preidctions. Finally the predictions were group using location and timestamp into sequences and majority class was assigned to the whole sequence as a final prediction.</p>
+<div id="data-pre-processing" class="section level2">
+<h2>Data pre-processing</h2>
+<p>The goal of 2020 iWildCam competition was to classify animals on the camera trap pictures. Created solution should work accuratly on the pictures taken in the new locations.
+Data provided by the competition organizers had large resolution and had to be resized before the analysis to speed up training time. There is also no need to train a model on large resolution images. I used the <a href="https://www.kaggle.com/qitvision/iwildcam2020-256">dataset</a> shared by the Joni Juvonen with images resized to 256x256.
+Additionally I created my own dataset and cropped original images to bboxes provided by the detector model (provided as competition data). I cropped images to bbox above 30% prediction confidence.</p>
+</div>
+<div id="data-augmentation" class="section level2">
+<h2>Data augmentation</h2>
+<p>I used random rotation of 20 degrees, random zoom and perspective warping and adjusted brightness and contrast both in the full images and croppes. I used reflection padding and normalized data to ImageNet stats.</p>
+</div>
+<div id="models" class="section level2">
+<h2>Models</h2>
+<p>I build two models. The first model was build on the original images resized to 128x128. I trained a ResNet50 using one cycle policy and mixup 10 epoches with froozen body, and next 10 epoches were all the model weights were retrained.
+The second model was also ResNet50 trained on cropped images resized to 128x128 using one cycle policy.
+I tried mixed precision and progressive resizing and increase the photos resolution to 256x256, but that didn’t improve the results.</p>
+</div>
+<div id="predictions" class="section level2">
+<h2>Predictions</h2>
+<p>Predictions are made using test time augmentation for both models. I aggregate the probabilities from 2 models using the formula <code>0.3 * probabilities from model 1 + 0.7 * probabilities from model 2</code>. For images with no predictions from the second model (lack of bbox or too low confidence) I only take predicitons from the first model. Finally I group the preidictions into sequences which I create using photo location info and timestamp. For each sequence I select the majority class in a sequence as a prediction label.</p>
+<p>I trained the models using Kaggle’s kernels.</p>
+</div>
+<div id="aknowledgements" class="section level2">
+<h2>Aknowledgements</h2>
+<p>Many thanks to fastai authors for creating an amazing learning resources and a powerful library.</p>
+</div>

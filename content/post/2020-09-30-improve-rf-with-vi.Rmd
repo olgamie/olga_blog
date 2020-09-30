@@ -1,5 +1,4 @@
 ---
-title: "Building first baseline model using random forest with ranger and DALEX"
 author: "Olga Mierzwa-Sulima"
 date: '2020-09-30'
 tags:
@@ -62,7 +61,7 @@ library(rlang)
 Read in data.
 
 ```{r message = FALSE, warning = FALSE}
-data_raw <- readr::read_csv(file = "Train.csv")
+data_raw <- readr::read_csv(file = "data/Train.csv")
 ```
 
 ### Data pre-processing
@@ -232,7 +231,7 @@ var_importance <- variable_importance(explainer_ranger,
 
 summarize_vi <- var_importance %>%
   group_by(variable) %>% 
-  summarize(mean_dropout_loss = mean(dropout_loss)) %>%
+  summarize(mean_dropout_loss = mean(dropout_loss), .groups = "keep") %>%
   arrange(-mean_dropout_loss) %>%
   mutate(variable = factor(variable, levels = variable))  
 

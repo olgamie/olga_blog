@@ -1,5 +1,4 @@
 ---
-title: "Building first baseline model using random forest with ranger and DALEX"
 author: "Olga Mierzwa-Sulima"
 date: '2020-09-30'
 tags:
@@ -52,7 +51,7 @@ library(DALEX)
 library(tidymodels)
 library(rlang)</code></pre>
 <p>Read in data.</p>
-<pre class="r"><code>data_raw &lt;- readr::read_csv(file = &quot;Train.csv&quot;)</code></pre>
+<pre class="r"><code>data_raw &lt;- readr::read_csv(file = &quot;data/Train.csv&quot;)</code></pre>
 <div id="data-pre-processing" class="section level3">
 <h3>Data pre-processing</h3>
 <p>There are few things to be done with the data before pluging them into the model.
@@ -153,12 +152,12 @@ I limit the number of trees to speed the training process to 40.</p>
                        sample.fraction = 1,
                        respect.unordered.factors = &quot;ignore&quot;
                        ))</code></pre>
-<pre><code>## Growing trees.. Progress: 18%. Estimated remaining time: 2 minutes, 26 seconds.
-## Growing trees.. Progress: 40%. Estimated remaining time: 1 minute, 33 seconds.
-## Growing trees.. Progress: 63%. Estimated remaining time: 1 minute, 0 seconds.
-## Growing trees.. Progress: 85%. Estimated remaining time: 23 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 15%. Estimated remaining time: 2 minutes, 55 seconds.
+## Growing trees.. Progress: 33%. Estimated remaining time: 2 minutes, 10 seconds.
+## Growing trees.. Progress: 57%. Estimated remaining time: 1 minute, 10 seconds.
+## Growing trees.. Progress: 83%. Estimated remaining time: 28 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 583.026   1.135 152.256</code></pre>
+## 568.808   1.669 158.982</code></pre>
 <pre class="r"><code>ranger_predictions &lt;- predict(ranger_model_with_sampling, x_valid)
 
 rmse &lt;- function(preds, y){
@@ -201,11 +200,11 @@ I drop <code>_baseline_</code> from the plot. Baseline is the change in model pe
 
 summarize_vi &lt;- var_importance %&gt;%
   group_by(variable) %&gt;% 
-  summarize(mean_dropout_loss = mean(dropout_loss)) %&gt;%
+  summarize(mean_dropout_loss = mean(dropout_loss), .groups = &quot;keep&quot;) %&gt;%
   arrange(-mean_dropout_loss) %&gt;%
-  mutate(variable = factor(variable, levels = variable))  </code></pre>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre class="r"><code>ggplot(data = summarize_vi[2:31,],
+  mutate(variable = factor(variable, levels = variable))  
+
+ggplot(data = summarize_vi[2:31,],
        aes(y = mean_dropout_loss, x = variable, group = 1)) +
   geom_line() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))</code></pre>
@@ -225,15 +224,15 @@ x_after_var_importance &lt;- x_train %&gt;% select(var_to_keep$variable)</code><
                        respect.unordered.factors = F,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 63%. Estimated remaining time: 20 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 60%. Estimated remaining time: 20 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 199.567   0.688  51.821</code></pre>
+## 202.407   0.673  53.474</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi &lt;- predict(ranger_model_after_vi,
                                        x_valid %&gt;% select(var_to_keep$variable))
 
 eval_model(
   ranger_model_after_vi, y_train, y_valid, ranger_predictions_after_vi$predictions)</code></pre>
-<pre><code>## [1] 0.9089519 0.2082119 0.2692650</code></pre>
+<pre><code>## [1] 0.9089414 0.2082239 0.2713373</code></pre>
 <p>I end up with a simpler model with almost the same quality, differences in R^2 and RMSE are neglectable. I prefer to continue with model with less features which runs faster.</p>
 <p>Let’s again look at variable importance plot and do more digging.</p>
 <pre class="r"><code>explainer_ranger_after_vi  &lt;- explain(ranger_model_after_vi,
@@ -245,10 +244,10 @@ eval_model(
 ##   -&gt; data              :  tibble converted into a data.frame 
 ##   -&gt; target variable   :  320900  values 
 ##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
-##   -&gt; predicted values  :  numerical, min =  8.482757 , mean =  10.09765 , max =  11.84426  
+##   -&gt; predicted values  :  numerical, min =  8.490319 , mean =  10.09761 , max =  11.84655  
 ##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task regression ( [33m default [39m ) 
 ##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
-##   -&gt; residuals         :  numerical, min =  -1.201127 , mean =  -0.0001043412 , max =  0.9551131  
+##   -&gt; residuals         :  numerical, min =  -1.232571 , mean =  -6.792331e-05 , max =  0.9657746  
 ##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>var_importance_ranger_after_vi &lt;- variable_importance(
   explainer_ranger_after_vi,
@@ -336,15 +335,15 @@ x_valid &lt;- x_valid %&gt;%
                        seed = 1,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 83%. Estimated remaining time: 6 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 75%. Estimated remaining time: 10 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 149.185   0.465  38.826</code></pre>
+## 151.394   0.699  41.831</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi_clean &lt;- predict(ranger_model_after_vi_data_clean,
                                        x_valid)
 
 eval_model(
   ranger_model_after_vi_data_clean, y_train, y_valid, ranger_predictions_after_vi_clean$predictions)</code></pre>
-<pre><code>## [1] 0.9104619 0.2064781 0.2667099</code></pre>
+<pre><code>## [1] 0.9107927 0.2060964 0.2653428</code></pre>
 <p>It seems cleaning YearMade and dropping IDs improved the model just a bit.</p>
 </div>
 </div>
