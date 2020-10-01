@@ -15,7 +15,7 @@ categories: data-science
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# tltr
+# TL;DR
 I show an approach to building a first baseline model using random forest (RF).
 I use `DALEX` package to understand a random forest built with `ranger` package, simplify it, improve performance, and run time. I use `recipes` package to handle categorical variables, missing values, and novel levels.
 
