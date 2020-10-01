@@ -55,11 +55,13 @@ library(rlang)</code></pre>
 <pre class="r"><code>data_raw &lt;- readr::read_csv(file = &quot;data/Train.csv&quot;)</code></pre>
 <div id="data-pre-processing" class="section level3">
 <h3>Data pre-processing</h3>
-<p>There are few things to be done with the data before pluging them into the model.
-* I need to handle missing data both in numeric and cardinal columns. In the numeric columns missing values are replaced with median with a <code>recipe</code> step <code>step_medianimpute()</code>. I add a dummy column for every numeric column that contains NAs using <code>add_dummy_for_na_numeric()</code> that I define myself.
-I replace NAs in character columns with “NA” string and threat missing values as a separate level.
-* I make sure my cardinal variables enter the model as factors. I use <code>recipe</code> <code>step_novel()</code> to make sure model can handle unseen levels in the validation set.
-* I add new features based on sale date column to help the model handle time better. New features are: elapsed number of days since 1 Jan 1970, day, week, month, year, day of week, day of year and indicators is year/quarter/month beginning/end and are added using <code>proc_date()</code>.</p>
+<p>There are few things to be done with the data before pluging them into the model.</p>
+<ul>
+<li>I need to handle missing data both in numeric and cardinal columns. In the numeric columns missing values are replaced with median with a <code>recipe</code> step <code>step_medianimpute()</code>. I add a dummy column for every numeric column that contains NAs using <code>add_dummy_for_na_numeric()</code> that I define myself.
+I replace NAs in character columns with “NA” string and threat missing values as a separate level.</li>
+<li>I make sure my cardinal variables enter the model as factors. I use <code>recipe</code> <code>step_novel()</code> to make sure model can handle unseen levels in the validation set.</li>
+<li>I add new features based on sale date column to help the model handle time better. New features are: elapsed number of days since 1 Jan 1970, day, week, month, year, day of week, day of year and indicators is year/quarter/month beginning/end and are added using <code>proc_date()</code>.</li>
+</ul>
 <pre class="r"><code>add_dummy_for_na_numeric &lt;- function(x){
   x %&gt;%
     mutate_if(~any(is.na(.)) &amp; is.numeric(.),
@@ -106,9 +108,11 @@ proc_date &lt;- function(data, var_name) {
 train_set &lt;- training(data_step1_split)
 
 valid_set &lt;- testing(data_step1_split)</code></pre>
-<p>The rest of the pre-processing is done using <code>recipes</code> package:
-* Replacing NAs in numeric columns with their median with <code>step_medianimpute()</code>
-* Changing characters to factors with <code>step_string2factor()</code></p>
+<p>The rest of the pre-processing is done using <code>recipes</code> package:</p>
+<ul>
+<li>Replacing NAs in numeric columns with their median with <code>step_medianimpute()</code></li>
+<li>Changing characters to factors with <code>step_string2factor()</code></li>
+</ul>
 <p>Additionally <code>recipe()</code> takes care of new levels in validation set using <code>step_novel()</code>.</p>
 <pre class="r"><code>recipe_formula &lt;-  recipe(log_SalePrice ~ ., data = data_step1_split)
 
@@ -153,12 +157,11 @@ I limit the number of trees to speed the training process to 40.</p>
                        sample.fraction = 1,
                        respect.unordered.factors = &quot;ignore&quot;
                        ))</code></pre>
-<pre><code>## Growing trees.. Progress: 13%. Estimated remaining time: 3 minutes, 51 seconds.
-## Growing trees.. Progress: 33%. Estimated remaining time: 2 minutes, 17 seconds.
-## Growing trees.. Progress: 57%. Estimated remaining time: 1 minute, 13 seconds.
-## Growing trees.. Progress: 83%. Estimated remaining time: 29 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 23%. Estimated remaining time: 2 minutes, 21 seconds.
+## Growing trees.. Progress: 53%. Estimated remaining time: 1 minute, 14 seconds.
+## Growing trees.. Progress: 83%. Estimated remaining time: 25 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 573.386   1.162 159.465</code></pre>
+## 552.498   0.789 142.328</code></pre>
 <pre class="r"><code>ranger_predictions &lt;- predict(ranger_model_with_sampling, x_valid)
 
 rmse &lt;- function(preds, y){
@@ -201,7 +204,7 @@ I drop <code>_baseline_</code> from the plot. Baseline is the change in model pe
 
 summarize_vi &lt;- var_importance %&gt;%
   group_by(variable) %&gt;% 
-  summarize(mean_dropout_loss = mean(dropout_loss), .groups = &quot;keep&quot;) %&gt;%
+  summarize(mean_dropout_loss = mean(dropout_loss), .groups = &quot;drop&quot;) %&gt;%
   arrange(-mean_dropout_loss) %&gt;%
   mutate(variable = factor(variable, levels = variable))  
 
@@ -225,15 +228,15 @@ x_after_var_importance &lt;- x_train %&gt;% select(var_to_keep$variable)</code><
                        respect.unordered.factors = F,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 53%. Estimated remaining time: 28 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 63%. Estimated remaining time: 20 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 219.967   0.494  57.147</code></pre>
+## 199.450   0.501  51.292</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi &lt;- predict(ranger_model_after_vi,
                                        x_valid %&gt;% select(var_to_keep$variable))
 
 eval_model(
   ranger_model_after_vi, y_train, y_valid, ranger_predictions_after_vi$predictions)</code></pre>
-<pre><code>## [1] 0.9095431 0.2075348 0.2697167</code></pre>
+<pre><code>## [1] 0.9089519 0.2082119 0.2692650</code></pre>
 <p>I end up with a simpler model with almost the same quality, differences in R^2 and RMSE are neglectable. I prefer to continue with model with less features which runs faster.</p>
 <p>Let’s again look at variable importance plot and do more digging.</p>
 <pre class="r"><code>explainer_ranger_after_vi  &lt;- explain(ranger_model_after_vi,
@@ -241,14 +244,14 @@ eval_model(
                                       y = y_train)</code></pre>
 <pre><code>## Preparation of a new explainer is initiated
 ##   -&gt; model label       :  ranger  ( [33m default [39m )
-##   -&gt; data              :  320900  rows  20  cols 
+##   -&gt; data              :  320900  rows  18  cols 
 ##   -&gt; data              :  tibble converted into a data.frame 
 ##   -&gt; target variable   :  320900  values 
 ##   -&gt; predict function  :  yhat.ranger  will be used ( [33m default [39m )
-##   -&gt; predicted values  :  numerical, min =  8.484916 , mean =  10.09765 , max =  11.84263  
+##   -&gt; predicted values  :  numerical, min =  8.482757 , mean =  10.09765 , max =  11.84426  
 ##   -&gt; model_info        :  package ranger , ver. 0.12.1 , task regression ( [33m default [39m ) 
 ##   -&gt; residual function :  difference between y and yhat ( [33m default [39m )
-##   -&gt; residuals         :  numerical, min =  -1.265856 , mean =  -0.0001042541 , max =  1.01988  
+##   -&gt; residuals         :  numerical, min =  -1.201127 , mean =  -0.0001043412 , max =  0.9551131  
 ##  [32m A new explainer has been created! [39m</code></pre>
 <pre class="r"><code>var_importance_ranger_after_vi &lt;- variable_importance(
   explainer_ranger_after_vi,
@@ -336,15 +339,15 @@ x_valid &lt;- x_valid %&gt;%
                        seed = 1,
                        min.node.size = 3,
                        sample.fraction = 1))</code></pre>
-<pre><code>## Growing trees.. Progress: 73%. Estimated remaining time: 12 seconds.</code></pre>
+<pre><code>## Growing trees.. Progress: 83%. Estimated remaining time: 6 seconds.</code></pre>
 <pre><code>##    user  system elapsed 
-## 167.538   0.418  43.486</code></pre>
+## 148.966   0.442  38.453</code></pre>
 <pre class="r"><code>ranger_predictions_after_vi_clean &lt;- predict(ranger_model_after_vi_data_clean,
                                        x_valid)
 
 eval_model(
   ranger_model_after_vi_data_clean, y_train, y_valid, ranger_predictions_after_vi_clean$predictions)</code></pre>
-<pre><code>## [1] 0.9114593 0.2053249 0.2651666</code></pre>
+<pre><code>## [1] 0.9104619 0.2064781 0.2667099</code></pre>
 <p>It seems cleaning YearMade and dropping IDs improved the model just a bit.</p>
 </div>
 </div>

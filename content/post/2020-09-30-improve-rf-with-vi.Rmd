@@ -68,6 +68,7 @@ data_raw <- readr::read_csv(file = "data/Train.csv")
 ### Data pre-processing
 
 There are few things to be done with the data before pluging them into the model.
+
 * I need to handle missing data both in numeric and cardinal columns. In the numeric columns missing values are replaced with median with a `recipe` step `step_medianimpute()`. I add a dummy column for every numeric column that contains NAs using `add_dummy_for_na_numeric()` that I define myself.
 I replace NAs in character columns with "NA" string and threat missing values as a separate level.
 * I make sure my cardinal variables enter the model as factors. I use `recipe` `step_novel()` to make sure model can handle unseen levels in the validation set.
@@ -135,6 +136,7 @@ valid_set <- testing(data_step1_split)
 ```
 
 The rest of the pre-processing is done using `recipes` package:
+
 * Replacing NAs in numeric columns with their median with `step_medianimpute()`
 * Changing characters to factors with `step_string2factor()`
 
@@ -232,7 +234,7 @@ var_importance <- variable_importance(explainer_ranger,
 
 summarize_vi <- var_importance %>%
   group_by(variable) %>% 
-  summarize(mean_dropout_loss = mean(dropout_loss), .groups = "keep") %>%
+  summarize(mean_dropout_loss = mean(dropout_loss), .groups = "drop") %>%
   arrange(-mean_dropout_loss) %>%
   mutate(variable = factor(variable, levels = variable))  
 
