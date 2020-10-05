@@ -1,7 +1,7 @@
 ---
 title: "Classifying animals on camera traps using deep learning - iWildCam 2020 Kaggle top 10% solution"
 author: "Olga Mierzwa-Sulima"
-date: '2020-10-04'
+date: '2020-10-05'
 tags:
 - deep learning
 - vision
@@ -10,15 +10,16 @@ tags:
 categories: data-science
 ---
 
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="tldr" class="section level2">
 <h2>TL;DR</h2>
 <p>I used data from <a href="https://www.kaggle.com/c/iwildcam-2020-fgvc7/overview">iWildCam 2020</a> Kaggle competition to practice machine learning vision after completing <a href="https://course.fast.ai/">fast.ai’s</a> deep learning course.
 I managed to build a solution that achieved 78% accuracy on the test set in classifying animals on the camera trap photo, which places the solution in the top 10% of this competition (10/126).
-I built two models: the first model is a ResNet50 on the original images but resized, with moderate data augmentation, mixup and TTA, the second model is also ResNet50 built on the cropped images to bboxes detecting the animals. Predictions were aggregated with probabilities from the original images’ model weighted with 0.3 and 0.7 for cropped model predictions. Finally, the predictions were grouped using location and timestamp into sequences and the majority class was assigned to the whole sequence as a final prediction.</p>
-<p><img src="iwildcam/zebra.jpg" alt="Zebra" />
-<em>Zebra captured by the camera. Picture from the test set.</em></p>
+I built two models: the first model is a ResNet50 on the original images but resized, with moderate data augmentation, mixup and TTA, the second model is also ResNet50 built on the cropped images to bboxes detecting the animals. Predictions were aggregated with probabilities from the original images’ model weighted with 0.3 and 0.7 for cropped model predictions. Finally, the predictions were grouped using location and time stamp into sequences and the majority class was assigned to the whole sequence as a final prediction.</p>
+<p><img src="https://github.com/olgamie/olga_blog/blob/master/content/post/iwildcam/zebra.jpg?raw=true" />
+<em>Zebra captured by the camera trap. Image from iWildcam 2020 test set.</em></p>
 </div>
 <div id="data-pre-processing" class="section level2">
 <h2>Data pre-processing</h2>
@@ -38,16 +39,18 @@ I tried mixed precision and progressive resizing and increase the resolution of 
 </div>
 <div id="predictions" class="section level2">
 <h2>Predictions</h2>
-<p>Predictions were made using test time augmentation for both models. I aggregated the probabilities from 2 models using the formula <code>0.3 * probabilities from model 1 + 0.7 * probabilities from model 2</code>. For images with no predictions from the second model (lack of bbox or too low confidence) I only toke predictions from the first model. Finally, I grouped the predictions into sequences which I created using photo location info and timestamp. For each sequence, I selected the majority class in a sequence as a prediction label.</p>
+<p>Predictions were made using test time augmentation for both models. Accuracy from the first model was 68% (calculated on Kaggle’s Private Leaderboard). Combining the predictions from the 2 models improved the results by 10%, resulting in final accuracy 78%. I aggregated the probabilities from 2 models using the formula <code>0.3 * probabilities from model 1 + 0.7 * probabilities from model 2</code>. For images with no predictions from the second model (lack of bbox or too low confidence) I only toke predictions from the first model. Finally, I grouped the predictions into sequences which I created using photo location info and time stamp. For each sequence, I selected the majority class in a sequence as a prediction label.</p>
 </div>
 <div id="code" class="section level2">
 <h2>Code</h2>
-<p>I trained the models using Kaggle’s kernels.
-Notebook for the model on the original images resized to 128x128 is <a href="https://www.kaggle.com/lennyom/iwildcam-2020-using-fastai-resnet50-mixup-and-tta">here</a>.
-Notebook for the second model on cropped images is <a href="https://www.kaggle.com/lennyom/iwildcam2020-fastai-on-cropped-images">here</a>.
-Kernel aggrehating the results <a href="https://www.kaggle.com/lennyom/output-aggregation">here</a>.</p>
+<p>I trained the models using Kaggle’s kernels.</p>
+<ul>
+<li>Notebook with the model on the original images resized to 128x128 is <a href="https://www.kaggle.com/lennyom/iwildcam-2020-using-fastai-resnet50-mixup-and-tta">here</a>.</li>
+<li>Notebook with the second model on cropped images is <a href="https://www.kaggle.com/lennyom/iwildcam2020-fastai-on-cropped-images">here</a>.</li>
+<li>Kernel aggregating the results <a href="https://www.kaggle.com/lennyom/output-aggregation">here</a>.</li>
+</ul>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2>Acknowledgments</h2>
-<p>Many thanks to fastai’s authors for creating amazing learning resources and a deep learning powerful library.</p>
+<p>Many thanks to fast.ai’s authors for creating amazing learning resources and a powerful deep learning library.</p>
 </div>
