@@ -1,0 +1,25 @@
+---
+title: "What to read as a New Engineering Manager"
+author: "Olga Mierzwa-Sulima"
+date: '2022-04-21'
+tags:
+- engineering manager
+- managament
+categories: engineering-management
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Moving into Engineering Management (EM) from the Individual Contributors (IC) track is a career change, not a promotion. Your responsibilities and schedule change completely. In the beginning, it might be scary, at least for me it felt like a new job. I’d like to list resources that help me navigate this change. Here are the ones that I read on a regular basis when settling in the new role.
+
+Before I moved to EM track and I was becoming a Tech Lead I read **Camille Fournier’s book [“The Manager’s Path”](amazon.com/Managers-Path-Leaders-Navigating-Growth/dp/1491973897)**. It gives a wide overview of what it means to become a manager. It’s a classic. It’s being recommended in almost every Twitter thread where people ask about resources for a new manager.
+
+I’m a big fan of **[Lara Hogan’s](https://larahogan.me/)** approach to leadership. I read her newsletter on a regular basis. I’ve also read her **book [“Resilient Management”](https://abookapart.com/products/resilient-management)**. I took an **online training program [“Demystifying Management”](https://courses.wherewithall.com/bundles/demystifying-management)**. Her book and newsletter contain a lot of useful resources for new managers e.g. [how to manage your energy levels](https://larahogan.me/blog/manager-energy-drain/) or [how to deliver impactful feedback](https://larahogan.me/blog/feedback-equation/).
+
+I want to recommend **3 more pieces** that had a huge impact on my career: **(1)** [how to say no and prioritize things through challenging times](https://larahogan.me/blog/how-to-say-no-right-now/), **(2)** [how to offer challenges](https://larahogan.me/blog/benefits-offering-challenges/) - we use the “yes, no, counter offer” framework when offering to lead a project to ICs at Appsilon. We reference Lara's post in a checklist for Delivery Managers who are supporting people managing the projects. The last post from Lara that I like and recommend tells you how to work better with your manager - **(3)** [“How to manage up effectively”](https://larahogan.me/blog/how-to-manage-up/).
+
+When I was changing from IC to EM track I read this post on [choosing the work that matters](https://lethain.com/work-on-what-matters/). It made me reflect on the fact that with career progression my responsibilities (both at work and at home) will only grow, while the time to do the job stays the same. Later I also bought **Will Larson’s book [“Staff Engineer: Leadership beyond the management track”](https://staffeng.com/book)**. I wanted to better support the ICs that I work with and help them navigate to Staff Plus roles.
+
+Last but not least, I recommend **Gergely Orosz's blog [The Pragmatic Engineer](https://blog.pragmaticengineer.com/)**. He shares his experience as EM during his time at Uber. I like his post on [fostering project leadership skills among ICs](https://blog.pragmaticengineer.com/a-team-where-everyone-is-a-leader/). We take a similar approach at Appsilon, where for most of our projects a developer is also a project leader. I used the [Tech Lead Expectations Document](https://newsletter.pragmaticengineer.com/p/templates-as-inspiration-for-engineering?s=r) (which used to be openly available, now paid subscribers only) to create Appsilon’s internal document describing expectations for our Project Leaders and Tech Leads. Another useful resource is the [Checklist for (new) Engineering Managers](https://blog.pragmaticengineer.com/checklist-for-first-time-managers/) (also paid only now, but you can check the blog post). I used it during 1-on-1s with myself to guide myself into the new role. Especially when I became an EM at Appsilon, we had no career ladder for this path defined.

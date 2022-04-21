@@ -1,12 +1,13 @@
 ---
 title: "About me"
-date: 2020-02-06
+date: 2022-04-21
 ---
 
-My name is Olga Mierzwa-Sulima and I am a Senior Data Scientist at <a href="https://appsilon.com" target="_blank">Appsilon</a>. I love solving problems using data, beautiful visualizations, dogs and back-country skiing.
+My name is Olga Mierzwa-Sulima and I am Head of Delivery at <a href="https://appsilon.com" target="_blank">Appsilon</a>. I love solving problems using data, beautiful visualizations, dogs and back-country skiing. At work I optimize for 3 things: (1) customer success, (2) thriving teams and individuals, and (3) happy Appsilon. 
 
 I hold a Master degree in Econometrics from the University of Rotterdam in the Netherlands. I have been working for boutique consulting companies helping global clients, like Unilever, NN or WHO.
 I'm huge enthusiast of the statistical programming language R, which is my primary tool at work. Since 2014 I co-organize <a href="https://www.meetup.com/Spotkania-Entuzjastow-R-Warsaw-R-Users-Group-Meetup/" target="_blank">Warsaw R Enthusiasts Meetup</a> and co-founded Warsaw R-Ladies chapter. I'm an international speaker and R workshop tutor.
+I'm a Data Scientist turned Engineering Manager and now Head of Delivery.
 
 Besides this blog you can find articles I write for <a href="https://appsilon.com/author/olga/" target="_blank">Appsilon blog</a>.
 
@@ -15,6 +16,11 @@ I live and work in Warsaw, Poland with my family.
 I care deeply about the environment.
 
 ## Talks
+
+**July 2020 <a href="https://user2020.r-project.org/" target="_blank">RStudio Webinar</a>**
+
+* <a href="https://www.youtube.com/watch?v=1RMf-C6GR7I" target="_blank">How to set up a distributed Data Science team</a>
+
 
 **July 2020 <a href="https://user2020.r-project.org/" target="_blank">useR! 2020</a>**
 

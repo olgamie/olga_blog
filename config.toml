@@ -25,7 +25,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     highlightLanguages = ["r"]
     progressively = true
     latestpostcount = 5
-    copyright = "Copyright © 2019 Olga Mierzwa-Sulima"
+    copyright = "Copyright © 2022 Olga Mierzwa-Sulima"
     posts_navigation = true
 
 [permalinks]
