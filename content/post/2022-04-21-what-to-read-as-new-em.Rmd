@@ -4,7 +4,7 @@ author: "Olga Mierzwa-Sulima"
 date: '2022-04-21'
 tags:
 - engineering manager
-- managament
+- management
 categories: engineering-management
 ---
 
