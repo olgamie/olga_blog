@@ -1,6 +1,6 @@
 baseurl = "https://olgamierzwa.com/"
 languageCode = "en-us"
-title = "Hello!"
+title = "Tech blog by Olga Mierzwa-Sulima"
 theme = "minimal"
 builddrafts = true
 canonifyurls = true
@@ -14,7 +14,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]
     author = "Olga Mierzwa-Sulima"
-    description = "Personal blog by Olga Mierzwa-Sulima"
+    description = "I write about engineering management, delivery management, data science and Rstats."
     githubUsername = "#"
     accent = "#28d102"
     showBorder = true
